@@ -2,6 +2,12 @@ import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 
 import firestore from "@/services/firestore";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Surprise Greeting Cards - Dashboard',
+  description: 'View the dashboard',
+}
 
 const formatDate = (date: Date) => {
   return new Intl.DateTimeFormat("en-GB", {
@@ -15,7 +21,7 @@ const DashboardPage = async () => {
 
   return (
     <div className="container mx-auto py-2">
-      <p className="text-2xl text-center font-bold">Virtual Card - Dashboard</p>
+      <p className="text-2xl text-center font-bold">Surprise Greeting Cards - Dashboard</p>
       <section className="my-2">
         <p><b>Current Cards:</b></p>
         <ul>

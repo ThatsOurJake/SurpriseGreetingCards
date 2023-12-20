@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen min-w-full bg-grad flex flex-col justify-center items-center gap-y-8">
-      <p className="font-bold text-9xl">Virtual Card</p>
+      <p className="font-bold text-7xl">Surprise Greeting Cards</p>
       <form className="w-full md:w-1/3 flex flex-col gap-y-3" action={viewCard}>
         <p className="text-center italic">Enter the ID of the card you want to view.</p>
         <input name="id" className="rounded-md p-2" placeholder="Card ID" required />

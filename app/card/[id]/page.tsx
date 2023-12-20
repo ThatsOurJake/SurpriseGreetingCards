@@ -1,9 +1,14 @@
 import firestore from "@/services/firestore";
 import { headers } from 'next/headers'
 
-import ImageCard from "../../components/cards/image-card";
 import { redirect } from "next/navigation";
 import CardWrapper from "../../components/cards/card-wrapper";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Surprise Greeting Cards - Card',
+  description: 'You have been sent you a card!',
+}
 
 const CardPage = async () => {
   const _headers = headers();

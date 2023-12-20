@@ -7,8 +7,8 @@ import './globals.css'
 const font = Quicksand({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Virtual Card',
-  description: 'Jake has sent you a virtual card',
+  title: 'Surprise Greeting Cards - Home',
+  description: 'Have a card id, visit here to enter it!',
 }
 
 export default function RootLayout({
