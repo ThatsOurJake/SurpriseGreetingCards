@@ -54,6 +54,7 @@ const Form = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "cookie": document.cookie,
       },
     });
 

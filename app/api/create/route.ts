@@ -1,6 +1,8 @@
+import { withApiAuthRequired } from "@auth0/nextjs-auth0";
+
 import type { CreateCardDIO, ImageCardData, TextCardData } from "@/app/shared-types";
 
-export const POST = async (req: Request) => {
+const req = async (req: Request) => {
   const { default: firestore } = await import("@/services/firestore");
 
   console.log('Creating Card');
@@ -31,3 +33,5 @@ export const POST = async (req: Request) => {
 
   return new Response(JSON.stringify(card), { status: 200, headers: { 'Content-Type': 'application/json' } });
 };
+
+export const POST = withApiAuthRequired(req);

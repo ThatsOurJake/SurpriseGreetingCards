@@ -1,6 +1,6 @@
+import { Metadata } from "next";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import Form from "./form";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: 'Surprise Greeting Cards - Create Card',
