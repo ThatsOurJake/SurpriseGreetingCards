@@ -1,7 +1,8 @@
-import firestore from "@/services/firestore";
 import type { CreateCardDIO, ImageCardData, TextCardData } from "@/app/shared-types";
 
 export const POST = async (req: Request) => {
+  const { default: firestore } = await import("@/services/firestore");
+
   console.log('Creating Card');
   const body = await req.json() as CreateCardDIO;
   const { data, theme, type, comment } = body;

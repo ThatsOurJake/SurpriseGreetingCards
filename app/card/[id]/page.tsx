@@ -1,16 +1,17 @@
-import firestore from "@/services/firestore";
-import { headers } from 'next/headers'
-
-import { redirect } from "next/navigation";
-import CardWrapper from "../../components/cards/card-wrapper";
 import { Metadata } from "next";
+import { headers } from 'next/headers'
+import { redirect } from "next/navigation";
+
+import CardWrapper from "../../components/cards/card-wrapper";
 
 export const metadata: Metadata = {
   title: 'Surprise Greeting Cards - Card',
   description: 'You have been sent you a card!',
-}
+};
 
 const CardPage = async () => {
+  const { default: firestore } = await import("@/services/firestore");
+
   const _headers = headers();
   const xUrl = _headers.get('x-url');
 

@@ -1,13 +1,11 @@
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import Link from "next/link";
-
-import firestore from "@/services/firestore";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: 'Surprise Greeting Cards - Dashboard',
   description: 'View the dashboard',
-}
+};
 
 const formatDate = (date: Date) => {
   return new Intl.DateTimeFormat("en-GB", {
@@ -17,6 +15,8 @@ const formatDate = (date: Date) => {
 }
 
 const DashboardPage = async () => {
+  const { default: firestore } = await import("@/services/firestore");
+
   const cards = await firestore.getAllCards();
 
   return (
