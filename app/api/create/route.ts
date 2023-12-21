@@ -1,5 +1,3 @@
-import { withApiAuthRequired } from "@auth0/nextjs-auth0";
-
 import type { CreateCardDIO, ImageCardData, TextCardData } from "@/app/shared-types";
 
 const req = async (req: Request) => {
@@ -34,4 +32,4 @@ const req = async (req: Request) => {
   return new Response(JSON.stringify(card), { status: 200, headers: { 'Content-Type': 'application/json' } });
 };
 
-export const POST = withApiAuthRequired(req);
+export const POST = req;

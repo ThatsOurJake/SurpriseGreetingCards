@@ -16,6 +16,4 @@ const CreateCard = async () => {
   );
 };
 
-export default withPageAuthRequired(CreateCard, {
-  returnTo: "/dashboard/create",
-});
+export default CreateCard;

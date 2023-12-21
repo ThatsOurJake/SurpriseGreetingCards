@@ -59,6 +59,4 @@ const DashboardPage = async () => {
   );
 };
 
-export default withPageAuthRequired(DashboardPage, {
-  returnTo: "/dashboard",
-});
+export default DashboardPage;
