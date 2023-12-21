@@ -53,7 +53,7 @@ const DashboardPage = async () => {
           )
         }
       </section>
-      <Link href="/dashboard/create" className="text-blue-600 hover:underline">
+      <Link href="/hub/create" className="text-blue-600 hover:underline">
         Create a new card
       </Link>
     </div>

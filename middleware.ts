@@ -1,7 +1,7 @@
 import { getSession } from "@auth0/nextjs-auth0/edge";
 import { NextResponse, NextRequest } from "next/server";
 
-const protectedRoutes = ["/dashboard", "/api/create"];
+const protectedRoutes = ["/hub", "/api/create"];
 
 export async function middleware(request: NextRequest) {
   const session = await getSession();
