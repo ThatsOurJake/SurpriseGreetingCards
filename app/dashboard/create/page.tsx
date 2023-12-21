@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { withPageAuthRequired } from "@auth0/nextjs-auth0";
+
 import Form from "./form";
 
 export const metadata: Metadata = {

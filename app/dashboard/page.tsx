@@ -1,4 +1,3 @@
-import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import Link from "next/link";
 import { Metadata } from "next";
 
@@ -13,6 +12,8 @@ const formatDate = (date: Date) => {
     timeStyle: "medium",
   }).format(date);
 }
+
+export const dynamic = 'force-dynamic';
 
 const DashboardPage = async () => {
   const { default: firestore } = await import("@/services/firestore");

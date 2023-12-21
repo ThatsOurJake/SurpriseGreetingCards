@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: 'You have been sent you a card!',
 };
 
+export const dynamic = 'force-dynamic';
+
 const CardPage = async () => {
   const { default: firestore } = await import("@/services/firestore");
 
