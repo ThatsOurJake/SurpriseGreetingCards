@@ -3,6 +3,7 @@ import Markdown from 'react-markdown'
 
 import MainCard from './main-card';
 import type { Theme } from '../../shared-types';
+import CardText from './card-text';
 
 interface ImageCardProps {
   theme?: Theme;
@@ -14,7 +15,7 @@ interface ImageCardProps {
 
 const ImageCard = ({ theme, frontImage, insideCoverText, insideText, isPreview }: ImageCardProps) => {
   const fontContent = <div className='h-full w-full'><img alt='front cover image' src={frontImage} className='w-full h-full' /></div>;
-  const insideContent = <div className='inside-text flex flex-col justify-center items-center h-full text-center' data-preview={isPreview?.valueOf()}><Markdown>{insideText}</Markdown></div>;
+  const insideContent = <CardText text={insideText} isPreview={isPreview} />;
 
   return (
     <MainCard theme={theme} frontContent={fontContent} insideContent={insideContent} insideCoverText={insideCoverText} />

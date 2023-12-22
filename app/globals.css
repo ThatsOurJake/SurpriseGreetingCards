@@ -54,20 +54,27 @@
   opacity: 1;
 }
 
-
 .bg-grad {
   background: rgb(0,173,239);
   background: radial-gradient(circle, rgba(0,173,239,1) 0%, rgba(1,125,198,1) 100%);
-}
-
-.inside-text {
-  font-size: 2em;
-  line-height: 2em;
-  row-gap: 1em;
 }
 
 .inside-text[data-preview="true"] {
   font-size: 1em;
   line-height: 1em;
   row-gap: 1em;
+}
+
+@layer base {
+  .inside-text {
+    font-size: 1em;
+    line-height: 1em;
+    row-gap: 1em;
+  }
+
+  .inside-text--large {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    row-gap: 1em;
+  }
 }
