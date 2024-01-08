@@ -6,7 +6,13 @@ import CardWrapper from "../../components/cards/card-wrapper";
 
 export const metadata: Metadata = {
   title: 'Surprise Greeting Cards - Card',
-  description: 'You have been sent you a card!',
+  description: 'You have been sent a surprise card!',
+  openGraph: {
+    type: 'website',
+    title: 'Surprise Greeting Cards - Card',
+    description: 'You have been sent a surprise card!',
+    url: 'https://surprisegreeting.cards/android-chrome-512x512.png',
+  }
 };
 
 export const dynamic = 'force-dynamic';

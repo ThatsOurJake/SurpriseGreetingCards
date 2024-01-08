@@ -1,9 +1,8 @@
 import type { CreateCardDIO, ImageCardData, TextCardData } from "@/app/shared-types";
 
-const req = async (req: Request) => {
+const post = async (req: Request) => {
   const { default: firestore } = await import("@/services/firestore");
 
-  console.log('Creating Card');
   const body = await req.json() as CreateCardDIO;
   const { data, theme, type, comment } = body;
 
@@ -27,9 +26,9 @@ const req = async (req: Request) => {
     }
   }
 
-  const card = await firestore.createCard(body);
+  const card = await firestore.processCard(body);
 
   return new Response(JSON.stringify(card), { status: 200, headers: { 'Content-Type': 'application/json' } });
 };
 
-export const POST = req;
+export const POST = post;
