@@ -38,9 +38,9 @@ const DashboardPage = async () => {
                     <p>|</p>
                     <p><b>Card Type: </b>{card.type}</p>
                     <p>|</p>
-                    <Link href={`/card/${card.shortId}`} className="text-blue-600 hover:underline">
+                    <a target="_blank" href={`/card/${card.shortId}`} className="text-blue-600 hover:underline">
                       View Card
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </li>

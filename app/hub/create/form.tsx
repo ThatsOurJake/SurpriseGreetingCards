@@ -7,6 +7,19 @@ import ThemePalette from "../../components/theme-palette";
 import type { CardType, CreateCardDIO, CreateCardDTO, Theme } from "@/app/shared-types";
 import Link from "next/link";
 
+const defaultValues = {
+  frontImage: "https://placehold.co/600x600/orange/white?text=Front+Image",
+  frontText: "Front Text",
+  insideText: "",
+  insideCoverText: "",
+  theme: {
+    frontPage: "slate",
+    insideCover: "gray",
+    insidePage: "gray",
+  },
+  comment: "",
+};
+
 const Form = () => {
   const [cardType, setCardType] = useState<string>("image");
 
@@ -68,6 +81,15 @@ const Form = () => {
     setSubmitting(false);
   }, [cardType, frontImage, frontText, insideCoverText, insideText, theme, comment]);
 
+  const onReset = useCallback(() => {
+    setFrontImage(defaultValues.frontImage);
+    setFrontText(defaultValues.frontText);
+    setInsideText(defaultValues.insideText);
+    setInsideCoverText(defaultValues.insideCoverText);
+    setTheme(defaultValues.theme);
+    setComment(defaultValues.comment);
+  }, []);
+
   return (
     <div className="py-2">
       <div className="w-1/2 md:w-3/5 mx-auto mb-4 flex flex-col items-center">
@@ -127,6 +149,9 @@ const Form = () => {
         }
         <button className="rounded-md p-2 bg-purple-600 hover:underline text-white disabled:bg-gray-600" disabled={submitting} onClick={onSubmit}>
           Create Card
+        </button>
+        <button className="rounded-md p-2 bg-pink-600 hover:underline text-white disabled:bg-gray-600" onClick={onReset}>
+          Reset Form
         </button>
       </div>
     </div>

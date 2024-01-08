@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import Form from "./form";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: 'Surprise Greeting Cards - Create Card',
@@ -12,6 +13,11 @@ const CreateCard = async () => {
     <div className="container mx-auto py-2">
       <p className="text-2xl text-center font-bold">Surprise Greeting Cards - Create Card</p>
       <Form />
+      <div className="text-center py-2">
+        <Link href="/hub" className="text-blue-600 hover:underline">
+          Goto Dashboard
+        </Link>
+      </div>
     </div>
   );
 };

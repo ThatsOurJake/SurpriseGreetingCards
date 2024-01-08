@@ -49,7 +49,7 @@ const getAllCards = async (): Promise<CreateCardDTO[]> => {
   return res.docs.map((doc) => ({
     ...doc.data(),
     id: doc.id,
-  }) as CreateCardDTO);
+  }) as CreateCardDTO).sort((a, b) => b.createdAt - a.createdAt);
 }
 
 const firestore = {
