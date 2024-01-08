@@ -26,10 +26,14 @@ interface CreateCardDIO {
   theme: Theme;
   comment: string;
   data: CardData;
+  id?: string;
 }
 
-interface CreateCardDTO extends CreateCardDIO {
+interface CreateCardDB extends CreateCardDIO {
   shortId: string;
   createdAt: number;
+}
+
+interface CreateCardDTO extends CreateCardDB {
   id: string;
 }

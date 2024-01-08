@@ -4,8 +4,7 @@ import React, { ChangeEvent, useCallback, useState } from "react";
 
 import CardWrapper from "../../components/cards/card-wrapper";
 import ThemePalette from "../../components/theme-palette";
-import type { CardType, CreateCardDIO, CreateCardDTO, Theme } from "@/app/shared-types";
-import Link from "next/link";
+import type { CardType, CreateCardDIO, CreateCardDTO, ImageCardData, TextCardData, Theme } from "@/app/shared-types";
 
 const defaultValues = {
   frontImage: "https://placehold.co/600x600/orange/white?text=Front+Image",
@@ -18,17 +17,26 @@ const defaultValues = {
     insidePage: "gray",
   },
   comment: "",
+  type: "image",
 };
 
-const Form = () => {
-  const [cardType, setCardType] = useState<string>("image");
+interface FormProps {
+  card?: CreateCardDTO;
+}
 
-  const [frontImage, setFrontImage] = useState<string>("https://placehold.co/600x600/orange/white?text=Front+Image");
-  const [frontText, setFrontText] = useState<string>("Front Text");
-  const [insideText, setInsideText] = useState<string>("");
-  const [insideCoverText, setInsideCoverText] = useState<string>("");
-  const [theme, setTheme] = useState<Theme>({ frontPage: "slate", insideCover: "gray", insidePage: "gray" });
-  const [comment, setComment] = useState<string>("");
+const Form = ({ card }: FormProps) => {
+  const [cardType, setCardType] = useState<string>(card?.type || defaultValues.type);
+
+  const [frontImage, setFrontImage] = useState<string>((card?.data as ImageCardData)?.frontImage || defaultValues.frontImage);
+  const [frontText, setFrontText] = useState<string>((card?.data as TextCardData)?.frontText || defaultValues.frontText);
+  const [insideText, setInsideText] = useState<string>(card?.data.insideText || defaultValues.insideText);
+  const [insideCoverText, setInsideCoverText] = useState<string>(card?.data.insideCoverText || defaultValues.insideCoverText);
+  const [theme, setTheme] = useState<Theme>({
+    frontPage: card?.theme.frontPage || defaultValues.theme.frontPage,
+    insideCover: card?.theme.insideCover || defaultValues.theme.insideCover,
+    insidePage: card?.theme.insidePage || defaultValues.theme.insidePage,
+  });
+  const [comment, setComment] = useState<string>(card?.comment || defaultValues.comment);
 
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -60,6 +68,7 @@ const Form = () => {
       },
       type: cardType as CardType,
       comment,
+      id: card?.id,
     };
 
     const res = await fetch("/api/create", {
@@ -79,7 +88,7 @@ const Form = () => {
     };
 
     setSubmitting(false);
-  }, [cardType, frontImage, frontText, insideCoverText, insideText, theme, comment]);
+  }, [cardType, frontImage, frontText, insideCoverText, insideText, theme, comment, card]);
 
   const onReset = useCallback(() => {
     setFrontImage(defaultValues.frontImage);
@@ -90,9 +99,33 @@ const Form = () => {
     setComment(defaultValues.comment);
   }, []);
 
+  const onDelete = useCallback(async () => {
+    const id = card?.id;
+
+    if (!id) {
+      return;
+    }
+
+    const res = await fetch(`/api/delete/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "cookie": document.cookie,
+      },
+    });
+
+    if (res.ok) {
+      window.location.href = "/hub";
+    } else {
+      setError(true);
+    };
+  }, [card]);
+
+  const successText = card ? "Card updated" : "New card created";
+
   return (
     <div className="py-2">
-      <div className="w-1/2 md:w-3/5 mx-auto mb-4 flex flex-col items-center">
+      <div className="w-full md:w-3/5 mx-auto mb-4 flex flex-col items-center">
         <p className="text-sm italic">Preview!</p>
         <div className="w-full flex justify-center my-4">
           <CardWrapper cardType={cardType as CardType} data={{ frontImage, insideText, insideCoverText, frontText }} theme={theme} isPreview />
@@ -136,7 +169,7 @@ const Form = () => {
         {
           newCard && (
             <div className="py-2">
-              <p>New card created - <Link className="text-blue-600 hover:underline" href={`/card/${newCard.shortId}`}>View here</Link></p>
+              <p>{successText} - <a target="_blank" className="text-blue-600 hover:underline" href={`/card/${newCard.shortId}`}>View here</a></p>
             </div>
           )
         }
@@ -148,11 +181,22 @@ const Form = () => {
           )
         }
         <button className="rounded-md p-2 bg-purple-600 hover:underline text-white disabled:bg-gray-600" disabled={submitting} onClick={onSubmit}>
-          Create Card
+          { card ? "Update Card" : "Create Card" }
         </button>
-        <button className="rounded-md p-2 bg-pink-600 hover:underline text-white disabled:bg-gray-600" onClick={onReset}>
-          Reset Form
-        </button>
+        {
+          !card && (
+            <button className="rounded-md p-2 bg-pink-600 hover:underline text-white disabled:bg-gray-600" onClick={onReset}>
+              Reset Form
+            </button>
+          )
+        }
+        {
+          card && (
+            <button className="rounded-md p-2 bg-red-600 hover:underline text-white disabled:bg-gray-600" onClick={onDelete}>
+              Delete Card
+            </button>
+          )
+        }
       </div>
     </div>
   );

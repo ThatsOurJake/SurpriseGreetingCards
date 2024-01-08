@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import Form from "./form";
+import Form from "../components/form";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -14,9 +14,9 @@ const CreateCard = async () => {
       <p className="text-2xl text-center font-bold">Surprise Greeting Cards - Create Card</p>
       <Form />
       <div className="text-center py-2">
-        <Link href="/hub" className="text-blue-600 hover:underline">
+        <a href="/hub" className="text-blue-600 hover:underline">
           Goto Dashboard
-        </Link>
+        </a>
       </div>
     </div>
   );
