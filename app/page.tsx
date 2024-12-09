@@ -15,6 +15,7 @@ export default async function Home() {
         <input name="id" className="rounded-md p-2" placeholder="Card ID" required />
         <button className="rounded-md p-2 bg-purple-600 hover:underline text-white" type="submit">View Card</button>
       </form>
+      <a className="absolute bottom-0 w-full text-center py-2 hover:underline" href="/hub">Admin Zone ✨</a>
     </main>
   );
 }

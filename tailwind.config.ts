@@ -7,7 +7,9 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {},
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/container-queries'),
+  ],
   safelist: [
     {
       pattern: /bg-\w*-400\b/,

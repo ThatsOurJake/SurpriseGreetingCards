@@ -17,6 +17,7 @@ const defaultValues = {
     insidePage: "gray",
   },
   comment: "",
+  signedByCats: false,
   type: "image",
 };
 
@@ -37,6 +38,7 @@ const Form = ({ card }: FormProps) => {
     insidePage: card?.theme.insidePage || defaultValues.theme.insidePage,
   });
   const [comment, setComment] = useState<string>(card?.comment || defaultValues.comment);
+  const [signedByCats, setSignedByCats] = useState<boolean>(card?.data.signedByCats || false);
 
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -60,6 +62,7 @@ const Form = ({ card }: FormProps) => {
         frontText,
         insideText,
         insideCoverText,
+        signedByCats,
       },
       theme: {
         frontPage: theme.frontPage,
@@ -88,7 +91,7 @@ const Form = ({ card }: FormProps) => {
     };
 
     setSubmitting(false);
-  }, [cardType, frontImage, frontText, insideCoverText, insideText, theme, comment, card]);
+  }, [cardType, frontImage, frontText, insideCoverText, insideText, theme, comment, card, signedByCats]);
 
   const onReset = useCallback(() => {
     setFrontImage(defaultValues.frontImage);
@@ -97,12 +100,19 @@ const Form = ({ card }: FormProps) => {
     setInsideCoverText(defaultValues.insideCoverText);
     setTheme(defaultValues.theme);
     setComment(defaultValues.comment);
+    setSignedByCats(defaultValues.signedByCats);
   }, []);
 
   const onDelete = useCallback(async () => {
     const id = card?.id;
 
     if (!id) {
+      return;
+    }
+
+    const confirmDelete = confirm("Are you sure you want to delete this card?");
+
+    if (!confirmDelete) {
       return;
     }
 
@@ -128,7 +138,7 @@ const Form = ({ card }: FormProps) => {
       <div className="w-full md:w-3/5 mx-auto mb-4 flex flex-col items-center">
         <p className="text-sm italic">Preview!</p>
         <div className="w-full flex justify-center my-4">
-          <CardWrapper cardType={cardType as CardType} data={{ frontImage, insideText, insideCoverText, frontText }} theme={theme} isPreview />
+          <CardWrapper cardType={cardType as CardType} data={{ frontImage, insideText, insideCoverText, frontText, signedByCats }} theme={theme} isPreview />
         </div>
       </div>
       <div className="flex flex-col gap-y-2 w-1/2 mx-auto">
@@ -162,6 +172,10 @@ const Form = ({ card }: FormProps) => {
           <textarea className="rounded-md border border-indigo-400 w-full p-2" value={insideText} onChange={(e) => setInsideText(e.target.value)} />
         </section>
         <ThemePalette theme={theme} onSwatchClick={onSwatchClick} />
+        <section className="flex flex-row gap-x-2 items-center">
+          <p className="font-bold">Is this card signed by Lunar and Syren?</p>
+          <input type="checkbox" checked={signedByCats} onChange={(e) => setSignedByCats(e.target.checked)} />
+        </section>
         <section>
           <p className="font-bold">Comment</p>
           <input className="rounded-md border border-indigo-400 w-full p-2" value={comment} onChange={(e) => setComment(e.target.value)} />

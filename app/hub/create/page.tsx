@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 
 import Form from "../components/form";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: 'Surprise Greeting Cards - Create Card',

@@ -9,6 +9,7 @@ interface Theme {
 type BaseData = {
   insideText?: string;
   insideCoverText?: string;
+  signedByCats?: boolean;
 }
 
 type ImageCardData = BaseData & {
